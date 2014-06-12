@@ -39,17 +39,7 @@ order by school
                 client.query(sql, [req.params.code], function(err, result){
                     console.log('row count= %d', result.rows.length);
 
-                    // 返却用object
-                    var ret = {};
-                    result.rows.forEach(function(row){
-                        // 学校名をキーにする
-                        ret[row.school] = {
-                            address: row.address,
-                            point: row.point
-                        };
-                    });
-
-                    res.send(ret);
+                    res.send(result.rows);
                 });
             }
         });

@@ -1,12 +1,44 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" ng-app="myModule">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title><%= title %></title>
 
-    
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD_O9EcAyfIRs1oQXU-vv2tWbSkTN4iqhU&sensor=false"></script>
+    <script src="js/index.js"></script>
 </head>
 <body>
-    <h1><%= title %></h1>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><%= title %></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- map -->
+            <div id="map_canvas" class="col-md-8"></div>
+
+            <div id="controll" class="col-md-4" ng-controller="GisController">
+                <ul>
+                    <li ng-repeat="area in areas">{{area.city}}</li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- /.container -->
+
 </body>
 </html>

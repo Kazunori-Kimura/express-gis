@@ -35,16 +35,7 @@ group by a27_006, a27_007
                 client.query(sql, [req.params.code], function(err, result){
                     console.log('row count= %d', result.rows.length);
 
-                    // 返却用object
-                    var ret = {};
-                    result.rows.forEach(function(row){
-                        // 学校名をキーとする
-                        ret[row.school] = {
-                            district: row.district
-                        };
-                    });
-
-                    res.send(ret);
+                    res.send(result.rows);
                 });
             }
         });
