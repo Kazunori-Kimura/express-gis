@@ -12,8 +12,10 @@
   "author": "kazunori kimura",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.3.1",
     "ejs": "^1.0.0",
     "express": "^4.4.2",
+    "here": "0.0.2",
     "pg": "^3.3.0"
   }
 }

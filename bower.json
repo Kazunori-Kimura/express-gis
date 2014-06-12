@@ -1,0 +1,25 @@
+{
+  "name": "gis",
+  "version": "0.0.0",
+  "authors": [
+    "kazunori.kimura <kazunori.kimura.js@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "gis"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-bootstrap-bower": "~0.11.0",
+    "bootstrap": "~3.1.1"
+  }
+}

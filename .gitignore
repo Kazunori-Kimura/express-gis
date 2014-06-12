@@ -48,5 +48,6 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
+bower_components
 gis_data
 
