@@ -1,8 +1,10 @@
 // routes/school.js
-var pg = require('pg');
-var here = require('here').here;
+var pg = require('pg'),
+    here = require('here').here;
 
-var cs = 'tcp://postgres:1qaz2wsx@localhost:5432/postgis_21_sample';
+// load environment data
+var env = require('../env.json');
+var cs = env.connection_string;
 
 module.exports = {
     /**
@@ -13,21 +15,24 @@ module.exports = {
 
         var sql = here(/*
 select
-    coalesce(a27_002, '') || ' ' || coalesce(a27_003, '') as school,
-    a27_004 as address,
-    ST_AsGeoJSON(geom) as point
-from "a27-10_27-g_publicelementaryschool"
+    coalesce(a27_002, '') || ' ' || coalesce(a27_003, '') as school
+    , a27_004 as address
+    , ST_AsGeoJSON(geom) as point 
+from
+    "a27-10_27-g_publicelementaryschool" 
 where
-    a27_001 = $1
-UNION ALL
+    a27_001 = $1 
+UNION ALL 
 select
-    coalesce(a27_002, '') || ' ' || coalesce(a27_003, '') as school,
-    a27_004 as address,
-    ST_AsGeoJSON(geom) as point
-from "a27-10_28-g_publicelementaryschool"
+    coalesce(a27_002, '') || ' ' || coalesce(a27_003, '') as school
+    , a27_004 as address
+    , ST_AsGeoJSON(geom) as point 
+from
+    "a27-10_28-g_publicelementaryschool" 
 where
-    a27_001 = $1
-order by school
+    a27_001 = $1 
+order by
+    school
 */).valueOf();
 
         // postgres接続

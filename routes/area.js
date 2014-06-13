@@ -1,8 +1,10 @@
 // routes/area.js
-var pg = require('pg');
-var here = require('here').here;
+var pg = require('pg'),
+    here = require('here').here;
 
-var cs = 'tcp://postgres:1qaz2wsx@localhost:5432/postgis_21_sample';
+// load environment data
+var env = require('../env.json');
+var cs = env.connection_string;
 
 module.exports = {
     // findAll
@@ -10,14 +12,16 @@ module.exports = {
         // 市区町村を取得
         var sql = here(/*
 select
-    n03_007 as code,
-    n03_001 || coalesce(n03_003, '') || coalesce(n03_004, '') as city
-from "n03-13_27_130401"
-UNION
+    n03_007 as code
+    , n03_001 || coalesce(n03_003, '') || coalesce(n03_004, '') as city 
+from
+    "n03-13_27_130401" 
+union 
 select
-    n03_007 as code,
-    n03_001 || coalesce(n03_003, '') || coalesce(n03_004, '') as city
-from "n03-13_28_130401"
+    n03_007 as code
+    , n03_001 || coalesce(n03_003, '') || coalesce(n03_004, '') as city 
+from
+    "n03-13_28_130401" 
 order by
     code
 */).valueOf();
@@ -45,19 +49,22 @@ order by
         // 市区町村を取得
         var sqlCity = here(/*
 select
-    n03_007 as code,
-    n03_001 || coalesce(n03_003, '') || coalesce(n03_004, '') as city
-from "n03-13_27_130401"
+    n03_007 as code
+    , n03_001 || coalesce(n03_003, '') || coalesce(n03_004, '') as city 
+from
+    "n03-13_27_130401" 
 where
-    n03_007 = $1
-UNION
+    n03_007 = $1 
+union
 select
-    n03_007 as code,
-    n03_001 || coalesce(n03_003, '') || coalesce(n03_004, '') as city
-from "n03-13_28_130401"
+    n03_007 as code
+    , n03_001 || coalesce(n03_003, '') || coalesce(n03_004, '') as city 
+from
+    "n03-13_28_130401" 
 where
-    n03_007 = $1
-limit 1
+    n03_007 = $1 
+limit
+    1
 */).valueOf();
 
         // polygonを取得
@@ -65,18 +72,24 @@ limit 1
 select
     n03_007 as code
     , ST_AsGeoJSON(ST_Centroid(ST_Union(geom))) as center
-    , ST_AsGeoJSON(ST_Union(geom)) as geojson
-from "n03-13_27_130401"
-where n03_007 = $1
-group by n03_007
-union all
+    , ST_AsGeoJSON(ST_Union(geom)) as geojson 
+from
+    "n03-13_27_130401" 
+where
+    n03_007 = $1 
+group by
+    n03_007 
+union all 
 select
     n03_007 as code
     , ST_AsGeoJSON(ST_Centroid(ST_Union(geom))) as center
-    , ST_AsGeoJSON(ST_Union(geom)) as geojson
-from "n03-13_28_130401"
-where n03_007 = $1
-group by n03_007
+    , ST_AsGeoJSON(ST_Union(geom)) as geojson 
+from
+    "n03-13_28_130401" 
+where
+    n03_007 = $1 
+group by
+    n03_007
 */).valueOf();
 
         var ret = {};

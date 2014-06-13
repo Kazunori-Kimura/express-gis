@@ -3,6 +3,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     app = express();
 
+// load environment data
+var env = require('./env.json');
+
 // route
 var area = require('./routes/area.js'),
     school = require('./routes/school.js'),
@@ -17,7 +20,7 @@ app.use(express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-    res.render('index', {title: 'GeoTest'});
+    res.render('index', { title: 'GeoTest', key: env.api_key });
 });
 
 // area 行政区域

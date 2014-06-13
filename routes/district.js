@@ -1,8 +1,10 @@
 // routes/district.js
-var pg = require('pg');
-var here = require('here').here;
+var pg = require('pg'),
+    here = require('here').here;
 
-var cs = 'tcp://postgres:1qaz2wsx@localhost:5432/postgis_21_sample';
+// load environment data
+var env = require('../env.json');
+var cs = env.connection_string;
 
 module.exports = {
     find: function(req, res){
@@ -10,20 +12,26 @@ module.exports = {
 
         var sql = here(/*
 select
-    coalesce(a27_006, '') || ' ' || coalesce(a27_007, '') as school,
-    ST_AsGeoJSON(ST_Union(geom)) as district
-from "a27-10_27-g_schooldistrict"
+    coalesce(a27_006, '') || ' ' || coalesce(a27_007, '') as school
+    , ST_AsGeoJSON(ST_Union(geom)) as district 
+from
+    "a27-10_27-g_schooldistrict" 
 where
-    a27_005 = $1
-group by a27_006, a27_007
-UNION ALL
+    a27_005 = $1 
+group by
+    a27_006
+    , a27_007 
+UNION ALL 
 select
-    coalesce(a27_006, '') || ' ' || coalesce(a27_007, '') as school,
-    ST_AsGeoJSON(ST_Union(geom)) as district
-from "a27-10_28-g_schooldistrict"
+    coalesce(a27_006, '') || ' ' || coalesce(a27_007, '') as school
+    , ST_AsGeoJSON(ST_Union(geom)) as district 
+from
+    "a27-10_28-g_schooldistrict" 
 where
-    a27_005 = $1
-group by a27_006, a27_007
+    a27_005 = $1 
+group by
+    a27_006
+    , a27_007
 */).valueOf();
 
         // postgres接続
