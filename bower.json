@@ -1,6 +1,6 @@
 {
-  "name": "gis",
-  "version": "0.0.0",
+  "name": "express-gis",
+  "version": "1.0.0",
   "authors": [
     "kazunori.kimura <kazunori.kimura.js@gmail.com>"
   ],
@@ -8,7 +8,9 @@
     "node"
   ],
   "keywords": [
-    "gis"
+    "gis",
+    "express",
+    "angularjs"
   ],
   "license": "MIT",
   "ignore": [
@@ -19,7 +21,10 @@
     "tests"
   ],
   "dependencies": {
-    "angular-ui-bootstrap-bower": "~0.11.0",
+    "angular": "~1.2.17",
     "bootstrap": "~3.1.1"
-  }
+  },
+  "homepage": "https://github.com/Kazunori-Kimura/express-gis",
+  "description": "Express x AngularJS x GoogleMap x PostGIS",
+  "main": "app.js"
 }

@@ -1,6 +1,6 @@
 {
-  "name": "gis-application",
-  "version": "0.0.0",
+  "name": "express-gis",
+  "version": "1.0.0",
   "description": "node gis application sample",
   "main": "app.js",
   "scripts": {
@@ -17,5 +17,14 @@
     "express": "^4.4.2",
     "here": "0.0.2",
     "pg": "^3.3.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Kazunori-Kimura/express-gis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kazunori-Kimura/express-gis/issues"
+  },
+  "homepage": "https://github.com/Kazunori-Kimura/express-gis"
 }
