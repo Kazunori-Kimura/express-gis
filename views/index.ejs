@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="jquery/dist/jquery.min.js"></script>
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="angular/angular.min.js"></script>
-    <script src="angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
-
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD_O9EcAyfIRs1oQXU-vv2tWbSkTN4iqhU&sensor=false"></script>
     <script src="js/index.js"></script>
 </head>
@@ -30,9 +26,9 @@
     <div class="container-fluid">
         <div class="row">
             <!-- map -->
-            <div id="map_canvas" class="col-md-8"></div>
+            <div id="map_canvas" class="col-md-9"></div>
 
-            <div id="controll" class="col-md-4" ng-controller="GisController">
+            <div id="controll" class="col-md-3" ng-controller="GisController">
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label class="sr-only" for="searchAddress">Search Address</label>
@@ -46,7 +42,7 @@
                     <a herf="#" class="list-group-item"
                         ng-repeat="area in areas | filter:searchText"
                         ng-class="{ active: isSelected(area.code) }"
-                        ng-click="clicker(area.code)">
+                        ng-click="selectArea(area.code)">
                         {{area.city}}
                     </a>
                 </div>

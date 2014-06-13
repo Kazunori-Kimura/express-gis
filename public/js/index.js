@@ -20,7 +20,8 @@
         }
 
         // リストクリック時の処理
-        $scope.clicker = function(code){
+        $scope.selectArea = function(code){
+
             // 選択アイテムのJIS5を保持
             $scope.selectedCode = code;
 
