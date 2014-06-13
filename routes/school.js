@@ -39,6 +39,9 @@ order by school
                 client.query(sql, [req.params.code], function(err, result){
                     console.log('row count= %d', result.rows.length);
 
+                    // 接続終了
+                    client.end();
+
                     res.send(result.rows);
                 });
             }

@@ -30,6 +30,9 @@ order by
                 // sql実行
                 client.query(sql, function(err, result){
                     console.log('row count= %d', result.rows.length);
+
+                    client.end();
+
                     res.send(result.rows);
                 });
             }
@@ -61,6 +64,7 @@ limit 1
         var sqlPolygon = here(/*
 select
     n03_007 as code
+    , ST_AsGeoJSON(ST_Centroid(ST_Union(geom))) as center
     , ST_AsGeoJSON(ST_Union(geom)) as geojson
 from "n03-13_27_130401"
 where n03_007 = $1
@@ -68,6 +72,7 @@ group by n03_007
 union all
 select
     n03_007 as code
+    , ST_AsGeoJSON(ST_Centroid(ST_Union(geom))) as center
     , ST_AsGeoJSON(ST_Union(geom)) as geojson
 from "n03-13_28_130401"
 where n03_007 = $1
@@ -107,7 +112,10 @@ group by n03_007
                     }
 
                     // ポリゴンデータ
+                    ret.center = result.rows[0].center;
                     ret.geojson = result.rows[0].geojson;
+
+                    client.end();
 
                     // レスポンスを返す
                     res.send(ret);

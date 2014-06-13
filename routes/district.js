@@ -35,6 +35,8 @@ group by a27_006, a27_007
                 client.query(sql, [req.params.code], function(err, result){
                     console.log('row count= %d', result.rows.length);
 
+                    client.end();
+
                     res.send(result.rows);
                 });
             }

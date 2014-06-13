@@ -33,9 +33,23 @@
             <div id="map_canvas" class="col-md-8"></div>
 
             <div id="controll" class="col-md-4" ng-controller="GisController">
-                <ul>
-                    <li ng-repeat="area in areas">{{area.city}}</li>
-                </ul>
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label class="sr-only" for="searchAddress">Search Address</label>
+                        <input type="text" class="form-control input-lg" id="searchAddress"
+                            ng-model="searchText"
+                            placeholder="Search">
+                    </div>
+                </form>
+                <hr>
+                <div class="list-group">
+                    <a herf="#" class="list-group-item"
+                        ng-repeat="area in areas | filter:searchText"
+                        ng-class="{ active: isSelected(area.code) }"
+                        ng-click="clicker(area.code)">
+                        {{area.city}}
+                    </a>
+                </div>
             </div>
         </div>
     </div><!-- /.container -->
